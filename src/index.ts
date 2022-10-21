@@ -1,0 +1,27 @@
+import * as dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import { authorRouter } from "./routes/author.router";
+dotenv.config();
+
+if (!process.env.PORT) {
+  process.exit(1);
+}
+
+// initialize the port
+const PORT: number = parseInt(process.env.PORT as string, 10);
+
+// initialize the express app
+const app = express();
+
+// use cors and json
+app.use(cors());
+app.use(express.json());
+
+// routes
+app.use("/api/authors", authorRouter);
+
+// start the server
+app.listen(PORT, () => {
+  console.log(`Listening on port http://localhost:${PORT}/`);
+});
