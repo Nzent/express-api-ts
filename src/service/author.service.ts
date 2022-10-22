@@ -1,13 +1,13 @@
 import { db } from "../utils/db.server";
 
-type Author = {
+type AuthorTypes = {
   id: number;
   firstName: string;
   lastName: string;
 };
 
 // get all authors
-export const listAuthors = async (): Promise<Author[]> => {
+export const listAuthors = async (): Promise<AuthorTypes[]> => {
   return db.author.findMany({
     select: {
       id: true,
@@ -18,7 +18,7 @@ export const listAuthors = async (): Promise<Author[]> => {
 };
 
 // get single author
-export const getAuthor = async (id: number): Promise<Author | null> => {
+export const getAuthor = async (id: number): Promise<AuthorTypes | null> => {
   return db.author.findUnique({
     where: {
       id,
@@ -28,8 +28,8 @@ export const getAuthor = async (id: number): Promise<Author | null> => {
 
 // create a single author
 export const createAuthor = async (
-  author: Omit<Author, "id">
-): Promise<Author> => {
+  author: Omit<AuthorTypes, "id">
+): Promise<AuthorTypes> => {
   const { firstName, lastName } = author;
   return db.author.create({
     data: {
@@ -46,9 +46,9 @@ export const createAuthor = async (
 
 // update a single author
 export const updateAuthor = async (
-  author: Omit<Author, "id">,
+  author: Omit<AuthorTypes, "id">,
   id: number
-): Promise<Author> => {
+): Promise<AuthorTypes> => {
   const { firstName, lastName } = author;
   return db.author.update({
     where: { id },

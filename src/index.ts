@@ -2,7 +2,11 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import { authorRouter } from "./routes/author.router";
+import { bookRouter } from "./routes/book.router";
+
+// config environment variables
 dotenv.config();
+
 
 if (!process.env.PORT) {
   process.exit(1);
@@ -18,8 +22,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// routes
+// author routes
 app.use("/api/authors", authorRouter);
+// books routes
+app.use("/api/books", bookRouter);
 
 // start the server
 app.listen(PORT, () => {
