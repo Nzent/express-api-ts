@@ -5,12 +5,24 @@ type Author = {
   firstName: string;
   lastName: string;
 };
+
+// get all authors
 export const listAuthors = async (): Promise<Author[]> => {
   return db.author.findMany({
     select: {
       id: true,
       firstName: true,
       lastName: true,
+    },
+  });
+};
+
+// get single author
+
+export const getAuthor = async (id: number): Promise<Author | null> => {
+  return db.author.findUnique({
+    where: {
+      id,
     },
   });
 };
