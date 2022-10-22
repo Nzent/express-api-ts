@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { authorRouter } from "./routes/author.router";
 import { bookRouter } from "./routes/book.router";
+import { indexRouter } from "./routes/index.router";
 
 // config environment variables
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(cors());
 app.use(express.json());
 
 // author routes
+app.use("/", indexRouter);
 app.use("/api/authors", authorRouter);
 // books routes
 app.use("/api/books", bookRouter);
