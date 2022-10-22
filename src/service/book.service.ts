@@ -1,11 +1,12 @@
 import { db } from "../utils/db.server";
+import { AuthorTypes } from "./author.service";
 
 type BookTypes = {
   id: number;
   title: string;
   datePublished: Date;
   isFiction: boolean;
-  authorId: number;
+  author: AuthorTypes;
 };
 
 // Get:get all books
@@ -16,7 +17,12 @@ export const listBooks = async (): Promise<BookTypes[]> => {
       title: true,
       datePublished: true,
       isFiction: true,
-      authorId: true,
+      author: {
+        select: {
+          firstName: true,
+          lastName: true,
+        },
+      },
     },
   });
 };

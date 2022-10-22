@@ -74,7 +74,7 @@ async function seed() {
           title,
           isFiction,
           datePublished,
-          authorId: author.id,
+          authorId: author!.id,
         },
       });
     })
